@@ -6,6 +6,31 @@
     <title>Twitter Tread sracper</title>
 </head>
 <body>
-    <h1><a href="trending">Click to run script</a></h1>
+    <p>The IP address used for this query was <p id="ip"></p></p>
+    
+    <ul>
+        <li>Afghan Taliban</li>
+        <li>RAJAT DALAL FOR THE WIN</li>
+        <li>Jains</li>
+        <li>Kohli</li>
+    </ul>
+    
+    <h1><a href="">Click to run again script</a></h1>
+    <script>
+        
+        async function fetchIPAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                document.getElementById('ip').textContent = data.ip; // Display IP address
+            } catch (error) {
+                console.error('Error fetching IP address:', error);
+                document.getElementById('ip').textContent = 'Unable to fetch IP address';
+            }
+        }
+
+        
+        fetchIPAddress();
+    </script>
 </body>
 </html>

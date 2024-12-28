@@ -7,17 +7,29 @@
 </head>
 <body>
     <h1><a href="">Click to run script</a></h1>
-    <p>The IP address used for this query was {{  }} </p>
+    <p>The IP address used for this query was <p id="ip"></p></p>
 
-    <ul>
-        <li>T1</li>
-        <li>T2</li>
-        <li>T3</li>
-        <li>T4</li>
+    <ul id="trendingHashtags">
+        {% for hashtag in hashtags %}
+            <li>{{ loop.index }}: {{ hashtag }}</li>
+        {% endfor %}
     </ul>
 
     <script>
-        ip_address = driver.execute_script("return navigator.connection.remoteAddress") 
+        
+        async function fetchIPAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                document.getElementById('ip').textContent = data.ip; // Display IP address
+            } catch (error) {
+                console.error('Error fetching IP address:', error);
+                document.getElementById('ip').textContent = 'Unable to fetch IP address';
+            }
+        }
+
+        
+        fetchIPAddress();
     </script>
 </body>
 </html>

@@ -9,7 +9,7 @@ from time import sleep
 
 from .models import TrendingHashtags
 
-# Set the path to ChromeDriver
+
 PATH = "C:/Windows/chromedriver.exe"
 def home(request):
     return render(request, 'index.html');
@@ -30,10 +30,10 @@ def get_trending_hashtags():
     driver = webdriver.Chrome(service=service, options=chrome_options)
     
     try:
-        # Navigate to Twitter login page
+        
         driver.get("https://x.com/i/flow/login")
 
-        sleep(5)  # Shorter sleep for page load
+        sleep(5)  
 
         # Username
         wait = WebDriverWait(driver, 10)
@@ -57,7 +57,7 @@ def get_trending_hashtags():
 
         # Password
         password = wait.until(EC.presence_of_element_located((By.XPATH, '//input[@name="password"]')))
-        password.send_keys("replace with your")
+        password.send_keys("enter your password")
 
         # Log in button
         login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Log in')]")))
@@ -83,7 +83,7 @@ def get_trending_hashtags():
     finally:
         driver.quit()
 
-# Django view to render the hashtags
+
 def trending_hashtags_view(request):
     hashtags = get_trending_hashtags()
     if hashtags:
